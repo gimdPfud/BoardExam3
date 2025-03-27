@@ -92,7 +92,8 @@ public class ProductService {
      * */
     public void productModify(ProductDTO dto, MultipartFile imgFile){
         //새로운 이미지가 있으면 기존 파일 삭제. (아니면 그대로 유지)
-        if(!imgFile.isEmpty() || imgFile!=null){                        //새로운 이미지파일이 존재하면
+        System.out.println("수정 : "+dto +"              "+ imgFile.getOriginalFilename());
+        if(imgFile!=null && !imgFile.isEmpty()){                        //새로운 이미지파일이 존재하면
             ProductEntity entity =
                     productRepository.findById(dto.getPid())            //해당 데이터를 조회함.
                             .orElseThrow();
