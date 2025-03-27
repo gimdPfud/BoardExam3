@@ -16,7 +16,42 @@
     <div class="row mt-3">
         <div class="col-1"></div><!--오른쪽여백-->
         <div class="col-10">
-            <h1 class="text-center">list</h1>
+            <h1 class="text-center">상품 관리</h1>
+            <a th:href="@{/product/insert}" class="btn btn-outline-primary" style="float: right">신상품 등록</a>
+
+<!--목록테이블-->
+            <table class="table text-center">
+                <thead>
+                    <tr><!--크기는 제목에만 설정하면 됨.-->
+                        <th style="width: 20%">상품이미지</th>
+                        <th style="width: 25%">상품명</th>
+                        <th style="width: 10%">상품정보</th>
+                        <th style="width: 10%">세일정보</th>
+                        <th style="width: 10%">가격</th>
+                        <th style="width: 10%">재고량</th>
+                        <th style="width: 15%">수정일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="data:${list}">
+                        <td><img th:src="@{|/image/${data.img}|}" width="150" height="100"></td>
+                        <td><a th:href="@{/product/detail(pid=${data.pid})}" th:text="${data.product}"></a></td>
+                        <td>
+                            <span th:if="${data.state==1}" class="badge bg-primary">신상</span>
+                            <span th:if="${data.state==2}" class="badge bg-secondary">판매중</span>
+                            <span th:if="${data.state==3}" class="badge bg-warning">이월</span>
+                        </td>
+                        <td>
+                            <span th:if="${data.sale==1}" class="badge bg-secondary">정상판매</span>
+                            <span th:if="${data.sale==2}" class="badge bg-success">세일</span>
+                        </td>
+                        <td th:text="${data.price}"></td><!--스크립트로 나중에 콤마처리.-->
+                        <td th:text="${data.quantity}"></td>
+                        <td th:text="${#temporals.format(data.modDate,'yy-MM-dd')}"></td>
+                    </tr>
+                </tbody>
+            </table><!--목록테이블-->
+
         </div><!--작업영역-->
         <div class="col-1"></div><!--왼쪽여백-->
     </div><!--row끝-->

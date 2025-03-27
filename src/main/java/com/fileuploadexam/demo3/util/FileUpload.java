@@ -29,7 +29,7 @@ public class FileUpload {
                                                                     //substring(시작,얼마나) : 지정한 위치부터 지정한 갯수만큼 문자열을 추출
         UUID uuid = UUID.randomUUID();                              //난수로 문자를 조합해서 생성함. "asd89aasdf-a8dsf-ads8fas..."
         String saveFileName = uuid + extension;                     //새로운 파일명을 만듦. "uuid.jpg"
-        String uploadUrl = imgLocation + saveFileName;              //최종 저장되는 위치 "product/image/uuid.jpg"
+        String uploadUrl = imgLocation +"/"+ saveFileName;              //최종 저장되는 위치 "product/image/uuid.jpg"
 
         /*외부작업은 반드시 try를 적용*/
         try {
@@ -54,7 +54,7 @@ public class FileUpload {
      * 기  능 : 지정된 위치에서 파일을 삭제
      * */
     public void FileDelete(String imgLocation, String imgFileName){
-        String deleteFileName = imgLocation + imgFileName ;
+        String deleteFileName = imgLocation +"/"+ imgFileName ;
         try {
             File deleteFile = new File(deleteFileName);
             if(deleteFile.exists()){                                //해당파일이 존재하면
